@@ -3,6 +3,7 @@ import { Header } from './Header';
 import Content from './Content';
 import Footer from './Footer';
 import AddItem from './AddItem';
+import SearchBox from './SearchBox';
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
   );
 
   const [newItem, setNewItem] = useState('');
+  const [search, setSearch] = useState('');
 
   const addNewItem = (item) => {
     const id = items.length ? items[items.length - 1].id + 1 : 1;
@@ -49,8 +51,12 @@ function App() {
         setNewItem={setNewItem}
         handleNewItemSubmit={handleNewItemSubmit}
       />
+      <SearchBox
+        search={search}
+        setSearch={setSearch}
+      />
       <Content 
-        items={items}
+        items={items.filter((item) => ((item.item).toLowerCase()).includes(search.toLowerCase()))}
         handleCheck={handleCheck}
         handleDelete={handleDelete}
       />
