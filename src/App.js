@@ -6,23 +6,9 @@ import AddItem from './AddItem';
 
 function App() {
 
-  const [items, setItems] = useState([
-    {
-        'id': 1,
-        'item': "This is the first item",
-        'checked': false
-    },
-    {
-        'id': 2,
-        'item': "This is the second item",
-        'checked': true
-    },
-    {
-        'id': 3,
-        'item': "This is the third item",
-        'checked': true 
-    }
-  ]);
+  const [items, setItems] = useState(
+    JSON.parse(localStorage.getItem('shoppingList'))
+  );
 
   const [newItem, setNewItem] = useState('');
 
@@ -35,6 +21,7 @@ function App() {
 
   const handleNewItemSubmit = (e) => {
     e.preventDefault()
+    if(!newItem) return;
     addNewItem(newItem)
     setNewItem('')
   }
